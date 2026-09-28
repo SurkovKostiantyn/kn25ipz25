@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <!-- Цей скрипт буде виконуватися до завантаження інших скриптів -->
+    <script> 
+        console.log("Hello, world!");
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Магазин товарів</h1>
+        <p id="cart">Кошик: <span id="num">0</span> товарів | ціна <span id="total">0</span> грн</p>
+    </header>
+
+    <!-- Сітка товарів, товари виводяться сюди через JavaScript -->
+    <div class="products-grid" id="products-grid">
+    </div>
+
+    <!-- Підключення основного скрипту після завантаження DOM -->
+    <script src="./assets/scripts/main.js"> </script>
+</body>
+
+</html>
