@@ -4,7 +4,10 @@
 [lab9](./web_lab9/index.html)
 
 ### Лабораторна робота 10:
-[lab10](./web_lab10/index.html)
+[lab10](./web_lab10/readme.md)
+
+### Лабораторна робота 11:
+[lab11](./web_lab11/readme.md)
 
 ## Програмування:
 
@@ -17,5 +20,5 @@
 
 Ці лабораторні доповнюють одна одну і тому виконуються разом:
 
-[lab6-7](./lab6_7/readme.md)
+[lab6-7](./php_lab6_7/readme.md)
 
