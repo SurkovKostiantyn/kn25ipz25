@@ -5,6 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     var_dump($file);
 
+    echo "<hr>";
+
     // 1. Перевіряємо, чи взагалі надійшов файл і чи не було помилок під час транспортування
     if ($file['error'] === UPLOAD_ERR_OK) {
 
@@ -16,13 +18,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Валідація по типу.
         // Білий список безпечних розширень:
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        $allowedExtensions = ['jpg', 'jpeg'];
 
         // Дістаємо "jpg" з тексту "my_photo-2023.min.jpg"
         $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
         if (!in_array($ext, $allowedExtensions)) {
-            die("Дозволено завантажувати ТІЛЬКИ картинки (jpg, png, gif)!");
+            die("Дозволено завантажувати ТІЛЬКИ картинки (jpg, jpeg)!");
         }
         
         // Створюємо нове ім'я на основі унікального ідентифікатора часу
@@ -46,3 +48,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<br>
+<a href="index.php">До списку файлів</a>

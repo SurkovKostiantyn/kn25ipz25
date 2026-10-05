@@ -7,12 +7,12 @@
 </head>
 <body>
     <form action="upload.php" method="POST" enctype="multipart/form-data">
-    <label>Оберіть своє фото (Аватар):</label><br>
-    <!-- type="file" створює кнопку "Огляд..." в браузері -->
-    <!-- Атрибут accept (необов'язковий) підказує браузеру показувати лише картинки -->
-    <input type="file" name="avatar" accept="image/png, image/jpeg" /><br>  
+        <label>Оберіть своє фото (Аватар):</label><br>
+        <!-- type="file" створює кнопку "Огляд..." в браузері -->
+        <!-- Атрибут accept (необов'язковий) підказує браузеру показувати лише картинки -->
+        <input type="file" name="avatar" accept="image/png, image/jpeg"/><br>  
 
-    <button type="submit">Завантажити</button>
+        <button type="submit">Завантажити</button>
     </form>
 
     <h1>Список завантажених фалів</h1>
