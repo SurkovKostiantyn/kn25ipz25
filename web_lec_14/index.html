@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: blue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ball"></div>
+    <script>
+        const ball = document.getElementById('ball');
+
+        // Відключаємо стандартний D&D браузера, щоб не було конфліктів!
+        ball.ondragstart = () => false;
+
+        ball.addEventListener('mousedown', function (event) {
+            // 1. Відриваємо елемент від звичайного потоку документа
+            ball.style.position = 'absolute';
+            ball.style.zIndex = 1000;
+
+            // Переміщуємо м'яч прямо в body, щоб він міг літати поверх усього
+            document.body.append(ball);
+
+            // Функція центрування м'яча прямо під курсором миші
+            function moveAt(pageX, pageY) {
+                ball.style.left = pageX - ball.offsetWidth / 2 + 'px';
+                ball.style.top = pageY - ball.offsetHeight / 2 + 'px';
+            }
+
+            // Одразу ставимо м'яч під курсор при натисканні
+            moveAt(event.pageX, event.pageY);
+
+            // 2. Обробник руху миші
+            function onMouseMove(event) {
+                moveAt(event.pageX, event.pageY);
+            }
+
+            // Важливо! Ми слухаємо рух миші на рівні ВСЬОГО документа, 
+            // бо при швидкому русі курсор може вийти за межі м'яча
+            document.addEventListener('mousemove', onMouseMove);
+
+            // 3. Відпускання кнопки миші
+            ball.addEventListener('mouseup', function () {
+                // Знімаємо обробник руху, м'яч залишається на своєму місці
+                document.removeEventListener('mousemove', onMouseMove);
+                // Прибираємо сам обробник mouseup, щоб уникнути витоку пам'яті
+                ball.onmouseup = null;
+            }, { once: true }); // {once: true} гарантує, що подія спрацює лише 1 раз
+        });
+    </script>
+</body>
+
+</html>
