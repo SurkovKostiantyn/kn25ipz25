@@ -8,13 +8,14 @@
 <nav>
     <ul>
         <li><a href="index.php">Головна</a></li>
-        <li><a href="cabinet.php">Кабінет</a></li>
-        
+
+     
         <?php 
         // Перевіряємо, чи користувач авторизований.
         // Якщо змінна сесії 'is_logged' не порожня - показуємо кнопку "Вихід".
         if (!empty($_SESSION['is_logged'])): 
         ?>
+            <li><a href="cabinet.php">Кабінет</a></li>
             <li><a href="logout.php">Вихід</a></li>
         <?php endif; ?>
     </ul>

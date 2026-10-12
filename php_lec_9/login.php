@@ -14,7 +14,8 @@ $userPassword = hash('sha256', '123');
 
 // Перевіряємо, чи надіслані дані через POST, і чи збігаються вони з еталонними
 // Введений пароль також хешуємо перед порівнянням
-if (isset($_POST['email']) && isset($_POST['password']) && 
+if (isset($_POST['email']) && 
+    isset($_POST['password']) && 
     $_POST['email'] === $userEmail && 
     hash('sha256', $_POST['password']) === $userPassword) {
     
@@ -23,7 +24,7 @@ if (isset($_POST['email']) && isset($_POST['password']) &&
     $_SESSION['uid'] = 99; // Унікальний ідентифікатор користувача
     
     // Встановлюємо куку (cookie), яка буде жити 1 хвилину (60 секунд)
-    $expireDate = time() + 60; 
+    $expireDate = time() + 20; 
     setcookie('user_time', time(), $expireDate, '/');
     
     // Перенаправляємо користувача до секретного кабінету
