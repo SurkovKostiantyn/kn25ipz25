@@ -1,0 +1,69 @@
+CREATE - додавання - REQUEST METHOD POST + INSERT INTO
+READ - виведення - REQUEST METHOD GET + SELECT * FROM
+UPDATE - редагування - REQUEST METHOD POST, PATCH, PUT + UPDATE SET
+DELETE - видалення - REQUEST METHOD POST, DELETE + DELETE FROM
+
+Приклад:
+
+Database: Users (id, name, email, password)
+
+1. Додаємо користувача
+INSERT INTO Users (name, email, password) VALUES ('John Doe', [EMAIL_ADDRESS]', '123456')
+
+2. Виводимо користувача
+SELECT * FROM Users WHERE id = 1
+
+3. Редагуємо користувача
+UPDATE Users SET name = 'John Doe', email = [EMAIL_ADDRESS]' WHERE id = 1
+
+4. Видаляємо користувача
+DELETE FROM Users WHERE id = 1
+
+// frontend example:
+<form action="add_user.php" method="post">
+    <label for="name">Ім'я:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Додати</button>
+</form>
+
+<form action="edit_user.php" method="post">
+    <label for="name">Ім'я:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" name="password" required>
+    <button type="submit">Редагувати</button>
+</form>
+
+// backend example:
+// create_user.php через PDO
+<?php
+$name = $_POST['name'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+$sql = "INSERT INTO Users (name, email, password) VALUES ('$name', '$email', '$password')";
+
+// PDO
+$conn = new PDO("mysql:host=localhost;dbname=users", "root", "");
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+// Це у нас UPDATE (PATCH, PUT - це для редагування)
+
+// edit user.php через PDO
+$name = $_POST['name'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+
+$sql = "UPDATE Users SET name = '$name', email = '$email', password = '$password' WHERE id = 1";
+
+// PDO
+$conn = new PDO("mysql:host=localhost;dbname=users", "root", "");
+$stmt = $conn->prepare($sql);
+$stmt->execute();
