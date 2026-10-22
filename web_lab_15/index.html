@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop</title>
+    <!-- Цей скрипт буде виконуватися до завантаження інших скриптів -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <script type="module">
+
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <h1>Магазин товарів</h1>
+        <p id="cart">Кошик: <span id="num">0</span> товарів | ціна <span id="total">0</span> грн</p>
+        <button class="btn-cart">Кошик</button>
+    </header>
+    <br>
+    <!-- Спінер -->
+    <div class="loader-container" id="loader">
+        <div class="spinner"></div>
+        <p>Завантаження товарів...</p>
+    </div>
+
+
+    <div class="drag-and-drop-zone" id="dragAndDropZone">
+    </div>
+
+
+    <div class="search-bar" style="margin: 20px 0; display: flex; gap: 12px; align-items: center;">
+        <input type="text" id="searchInput" placeholder="Почніть вводити назву товару..."
+            style="padding: 10px; width: 320px; border: 1px solid #ccc; border-radius: 6px;">
+        <span id="searchResultCount" style="color: #666; font-size: 14px;"></span>
+    </div>
+
+    <!-- Сітка товарів, товари виводяться сюди через JavaScript -->
+    <div class="products-grid" id="products-grid">
+    </div>
+
+
+    <!-- Темний напівпрозорий фон, який перекриває весь сайт -->
+    <div class="modal-overlay hidden" id="cartOverlay">
+        <!-- Саме біле вікно кошика по центру -->
+        <div class="modal-window">
+            <div class="modal-header">
+                <h2>Ваш Кошик</h2>
+                <button class="close-btn" id="closeCartBtn">&times;</button>
+            </div>
+
+            <!-- Тут JS малюватиме додані товари -->
+            <div class="cart-items" id="cartItemsContainer">
+            </div>
+
+            <div class="modal-footer">
+                <h3>Разом: <span id="cartTotalSum"></span> грн</h3>
+                <!-- Посилання на нашу форму оформлення з ПР №6 -->
+                <section class="checkout-card"
+                    style="margin: 30px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; max-width: 500px;">
+                    <h3>Оформлення замовлення</h3>
+                    <form id="checkoutOrderForm" novalidate>
+                        <div class="form-row" style="margin-bottom: 12px;">
+                            <label for="clientName" style="display: block; margin-bottom: 4px;">ПІБ покупця:</label>
+                            <input type="text" id="clientName" name="clientName"
+                                placeholder="Коваленко Олександр Сергійович" required
+                                style="width: 100%; padding: 8px; box-sizing: border-box;">
+                            <span class="input-error" id="nameError" style="color: red; font-size: 13px;"></span>
+                        </div>
+
+                        <div class="form-row" style="margin-bottom: 12px;">
+                            <label for="clientPhone" style="display: block; margin-bottom: 4px;">Номер телефону
+                                (+380...):</label>
+                            <input type="tel" id="clientPhone" name="clientPhone" placeholder="+38 (097) 123-45-67"
+                                required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                            <span class="input-error" id="phoneError" style="color: red; font-size: 13px;"></span>
+                        </div>
+
+                        <div class="form-row" style="margin-bottom: 12px;">
+                            <label for="clientEmail" style="display: block; margin-bottom: 4px;">Електронна
+                                пошта:</label>
+                            <input type="email" id="clientEmail" name="clientEmail" placeholder="olexandr@example.com"
+                                required style="width: 100%; padding: 8px; box-sizing: border-box;">
+                            <span class="input-error" id="emailError" style="color: red; font-size: 13px;"></span>
+                        </div>
+
+                        <div class="form-row" style="margin-bottom: 16px;">
+                            <label for="orderPromo" style="display: block; margin-bottom: 4px;">Промокод (якщо
+                                є):</label>
+                            <input type="text" id="orderPromo" name="orderPromo"
+                                placeholder="Введіть SALE10 для знижки 10%"
+                                style="width: 100%; padding: 8px; box-sizing: border-box;">
+                        </div>
+
+                        <button type="submit" id="btnPlaceOrder"
+                            style="padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            Підтвердити замовлення
+                        </button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Підключення основного скрипту після завантаження DOM -->
+    <script src="./assets/scripts/main.js"> </script>
+    <script src="./assets/scripts/checkout.js"> </script>
+</body>
+
+</html>
