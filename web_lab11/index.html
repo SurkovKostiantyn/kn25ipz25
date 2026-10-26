@@ -7,17 +7,12 @@
     <title>Shop</title>
     <!-- Цей скрипт буде виконуватися до завантаження інших скриптів -->
     <link rel="stylesheet" href="./assets/css/style.css">
-    <script type="module">
-        async function getDog() {
-            const response = await fetch('https://dog.ceo/api/breeds/image/random');
-            const json = await response.json();
-            console.log(json.message);
-        }
-        getDog();
-    </script>
 </head>
 
 <body>
+
+    <div id="random"></div>
+
 
     <header>
         <h1>Магазин товарів</h1>
@@ -36,6 +31,7 @@
 
     <!-- Підключення основного скрипту після завантаження DOM -->
     <script src="./assets/scripts/main.js"> </script>
+    <script src="./assets/scripts/api.js" type="module"></script>
 </body>
 
 </html>
