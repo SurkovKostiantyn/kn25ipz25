@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 // 1. Параметри підключення до СКБД MySQL (налаштування для XAMPP/MAMP)
-$host     = '127.0.0.1';
+$host     = '127.0.0.1'; // 'localhost';
 $port     = '3306';
 $dbname   = 'task_manager';
 $username = 'root';
@@ -14,6 +14,7 @@ $dsn = "mysql:host={$host};port={$port};dbname={$dbname};charset={$charset}";
 
 $tables = [];
 $tasks = [];
+$users = [];
 $connectionStatus = false;
 $errorMessage = null;
 $serverInfo = '';
@@ -43,6 +44,21 @@ try {
         $tasksStmt = $pdo->query('SELECT * FROM tasks ORDER BY id ASC');
         $tasks = $tasksStmt->fetchAll();
     }
+
+    // Крок В: Отримання всіх користувачів із таблиці users (якщо таблиця вже створена)
+    if(in_array('users', $tables, true)){
+        $usersStmt = $pdo->query('
+            SELECT 
+                users.id, 
+                users.username, 
+                users.email, 
+                (SELECT count(tasks.id) FROM tasks WHERE tasks.user_id = users.id) as tasks_num
+            FROM users 
+            ORDER BY users.id ASC
+        ');
+        $users = $usersStmt->fetchAll();
+    }
+
 } catch (PDOException $e) {
     // Перехоплюємо виняток підключення (використовуючи принципи обробки помилок із ЛР №11)
     $connectionStatus = false;
@@ -201,6 +217,32 @@ try {
                 </table>
             <?php else: ?>
                 <p>У таблиці <code>tasks</code> поки немає записів. Додайте 2–3 тестові завдання через вкладку «Вставити» (Insert) у phpMyAdmin.</p>
+            <?php endif; ?>
+
+            <h2>3. Тестові записи з таблиці <code>users</code> (запит <code>SELECT * FROM users</code>)</h2>
+            <?php if(!empty($users)): ?>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Number of tasks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($users as $user): ?>
+                            <tr>
+                                <td><strong>#<?= htmlspecialchars((string)($user['id'] ?? '')) ?></strong></td>
+                                <td><?= htmlspecialchars((string)($user['username'] ?? '')) ?></td>
+                                <td><?= htmlspecialchars((string)($user['email'] ?? '')) ?></td>
+                                <td><?= htmlspecialchars((string)($user['tasks_num'] ?? '')) ?></td>                                
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>У таблиці <code>users</code> поки немає записів. Додайте 2–3 тестові завдання через вкладку «Вставити» (Insert) у phpMyAdmin.</p>
             <?php endif; ?>
 
         <?php else: ?>
