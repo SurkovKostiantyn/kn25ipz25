@@ -59,7 +59,7 @@ $tasks = $repo->findAll();
 <body>
 <h1>Менеджер завдань</h1>
 <p>Привіт, <strong><?= htmlspecialchars($_SESSION['user_name'] ?? 'Користувач') ?></strong>!
-   <a href="login.php">Вийти</a></p>
+   <a href="logout.php">Вийти</a></p>
 
 <div class="stats">
     Всього: <?= count($tasks) ?> |
